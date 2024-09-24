@@ -134,16 +134,14 @@
     </div>
     <div>
 
-        <ul>
-            @for (item of (this.noteService.items$ | async); track item) {
-              <li>
-                {{ item['title'] }}
-              </li>
-            }
-          </ul>
+     <div class="notes_wrapper">
+        <div class="notes_list_button_wrapper">
+
+        </div>
+        <div>
+            <app-note *ngFor="let note of getList()" [note]="note"></app-note>
+        </div>
+     </div>
         
-      <!--   @for (note of noteList; track note) {
-            <app-note [note]="note"></app-note>
-          } -->
-    </div>
+     
 </div>

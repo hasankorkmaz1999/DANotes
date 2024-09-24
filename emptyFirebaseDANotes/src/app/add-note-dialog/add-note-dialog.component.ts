@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, contentChild } from '@angular/core';
 import { Note } from '../interfaces/note.interface';
 import { NoteListService } from '../firebase-services/note-list.service'
 import { CommonModule } from '@angular/common';
@@ -15,6 +15,7 @@ export class AddNoteDialogComponent {
   @Output() addDialogClosed: EventEmitter<boolean> = new EventEmitter();
   title = "";
   description = "";
+  
 
   constructor(public noteService: NoteListService){}
 
@@ -25,6 +26,14 @@ export class AddNoteDialogComponent {
   }
 
   addNote(){
+    let note: Note = {
+    type: "note",
+    title:this.title,
+    content: this.description,
+    marked: false,
+  }
+    this.noteService.addNote(note)
+
     //beachte das closeDialog() zum Schluss kommt, denn es leert die Variablen
     this.closeDialog();
   }
